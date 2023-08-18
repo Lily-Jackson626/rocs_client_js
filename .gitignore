@@ -21,4 +21,4 @@ pnpm-debug.log*
 *.d.ts
 *.js
 
-!/docs
+!/docs/*
