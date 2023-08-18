@@ -1,18 +1,15 @@
 .git/
+.idea/
 node_modules/
 test/
 docs/
-.idea/
 build/
-
 
 *.md
 *.log
 *.ts
 !*.d.ts
 
-
 /package-lock.json
 tsconfig.json
 .versionrc.json
-CHANGELOG.md
