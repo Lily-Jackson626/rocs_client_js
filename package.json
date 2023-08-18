@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "doc": "typedoc index.ts ",
     "deploy": "tsc && npx standard-version && npm publish"
   },
   "author": "fftai",
