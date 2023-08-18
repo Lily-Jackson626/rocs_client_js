@@ -1,0 +1,23 @@
+{
+  "name": "gros-client",
+  "version": "0.1.54",
+  "description": "this client for npm",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "tsc && npx standard-version && npm publish"
+  },
+  "author": "fftai",
+  "license": "ISC",
+  "devDependencies": {
+    "@microsoft/tsdoc": "^0.14.2",
+    "@types/ws": "^8.5.5",
+    "standard-version": "^9.5.0",
+    "typedoc": "^0.24.8"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "events": "^3.3.0",
+    "ws": "^8.13.0"
+  }
+}
