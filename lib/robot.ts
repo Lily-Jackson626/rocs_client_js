@@ -38,16 +38,16 @@ enum RobotType {
  */
 export class Robot extends EventEmitter {
 
+    // robot_type: human ; dog; car
+    public type: string = '';
+    // robot mod
+    public mod: Mod = Mod.MOD_ORIGINAL
     // ctrl websocket
     private ws!: WebSocket;
     // websocket send msg retry count
     private retry_count: number = 0
     // The base path of the http request
     private readonly baseUrl: string = '';
-    // robot_type: human ; dog; car
-    public type: string = '';
-    // robot mod
-    public mod: Mod = Mod.MOD_ORIGINAL
 
     /**
      * this is constructor
@@ -104,6 +104,33 @@ export class Robot extends EventEmitter {
             console.error(`robot init fail ==> ${e}`)
         }
 
+    }
+
+    /**
+     * cover param
+     *
+     * @param {number} param param_value
+     * @param {string} value param_name
+     * @param {number} minThreshold param min threshold
+     * @param {number} maxThreshold param max threshold
+     * @private
+     */
+    private static cover_param(param: number, value: string, minThreshold: number, maxThreshold: number): number {
+        if (param == undefined) {
+            console.warn(`Illegal parameter: ${value} = ${param} `)
+            param = 0
+        }
+        if (param > maxThreshold) {
+            console.warn(`Illegal parameter: ${value} = ${param} `,
+                `greater than maximum, expected not be greater than ${maxThreshold}, actual ${param}`)
+            param = maxThreshold
+        }
+        if (param < minThreshold) {
+            console.warn(`Illegal parameter: ${value} = ${param} `,
+                `greater than maximum, expected not be less than ${minThreshold}, actual ${param}`)
+            param = minThreshold
+        }
+        return param
     }
 
     /**
@@ -501,33 +528,6 @@ export class Robot extends EventEmitter {
             baseURL: this.baseUrl,
             ...config
         })
-    }
-
-    /**
-     * cover param
-     *
-     * @param {number} param param_value
-     * @param {string} value param_name
-     * @param {number} minThreshold param min threshold
-     * @param {number} maxThreshold param max threshold
-     * @private
-     */
-    private static cover_param(param: number, value: string, minThreshold: number, maxThreshold: number): number {
-        if (param == undefined) {
-            console.warn(`Illegal parameter: ${value} = ${param} `)
-            param = 0
-        }
-        if (param > maxThreshold) {
-            console.warn(`Illegal parameter: ${value} = ${param} `,
-                `greater than maximum, expected not be greater than ${maxThreshold}, actual ${param}`)
-            param = maxThreshold
-        }
-        if (param < minThreshold) {
-            console.warn(`Illegal parameter: ${value} = ${param} `,
-                `greater than maximum, expected not be less than ${minThreshold}, actual ${param}`)
-            param = minThreshold
-        }
-        return param
     }
 
 
