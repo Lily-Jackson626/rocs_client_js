@@ -1,6 +1,6 @@
 {
   "name": "gros-client",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "this client for npm",
   "main": "index.js",
   "scripts": {
