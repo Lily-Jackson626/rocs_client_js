@@ -68,10 +68,10 @@ export class Robot extends EventEmitter {
 
         try {
             if (typeof window !== 'undefined') {
-                // 在浏览器环境下
+                // applicable to the brower 
                 this.ws = new WebSocket(ws_url);
             } else {
-                // 在Node.js环境下
+                // applicable to the nodejs  
                 const WebSocket = require('ws');
                 this.ws = new WebSocket(ws_url);
             }
@@ -200,14 +200,17 @@ export class Robot extends EventEmitter {
      * @return {Promise}  return
      */
     public async setMode(mod: Mod): Promise<any> {
-        this.mod = mod
-        return this.http_request({
-            method: "POST",
-            url: "/robot/mode",
-            data: {
-                "mod_val": mod.toString()
-            }
-        });
+        if (this.type == RobotType.CAR.toString()) {
+            this.mod = mod
+            return this.http_request({
+                method: "POST",
+                url: "/robot/mode",
+                data: {
+                    "mod_val": mod.toString()
+                }
+            });
+        }
+        console.warn('robot type not allow this command! The current function is only applicable to car');
     }
 
     /**
@@ -297,10 +300,13 @@ export class Robot extends EventEmitter {
      *  ``applicable to the human``
      */
     public async stand(): Promise<any> {
-        return this.http_request({
-            method: "POST",
-            url: "/robot/stand"
-        })
+        if (this.type == RobotType.HUMAN.toString()) {
+            return this.http_request({
+                method: "POST",
+                url: "/robot/stand"
+            })
+        }   
+        console.warn('robot type not allow this command! The current function is only applicable to human');
     }
 
     /**
@@ -333,7 +339,10 @@ export class Robot extends EventEmitter {
      * @param {number} yaw
      */
     public head(roll: number, pitch: number, yaw: number): void {
-        this.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
+        if (this.type == RobotType.HUMAN.toString()) {
+            this.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
+        }
+        console.warn('robot type not allow this command! The current function is only applicable to human');
     }
 
     /**
@@ -344,6 +353,10 @@ export class Robot extends EventEmitter {
      * @param callback
      */
     public action_rotate_and_fluctuate(rotate_speed: number, fluctuate_cycle: number, callback: () => void): void {
+        if (this.type != RobotType.CAR.toString()) {
+            console.warn('robot type not allow this command! The current function is only applicable to car');
+            return
+        }
 
         rotate_speed = Robot.cover_param(rotate_speed, "rotate_speed", 0, 500)
 
