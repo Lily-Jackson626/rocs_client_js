@@ -56,7 +56,7 @@ export class Robot extends EventEmitter {
      */
     constructor(option?: ConnectOption) {
         super()
-        const {ssl = false, host = '127.0.0.1', port = '8001'} = option ?? {};
+        const {ssl = false, host = '192.168.12.1', port = '8001'} = option ?? {};
         let ws_url: string
         if (ssl) {
             ws_url = `wss://${host}:${port}/ws`
