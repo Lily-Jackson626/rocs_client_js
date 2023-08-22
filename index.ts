@@ -185,6 +185,8 @@ export class Robot extends EventEmitter {
      * @return {Promise}  Returns a specific robot type such as dog human car
      */
     public async getType(): Promise<any> {
+        // todo ：关于命名规则的问题。我们自己的项目，无论语言，需要统一规则，还是不同语言使用不同的规则。
+        // 比如 ts 常用的大小驼峰式。python 常用的烤串式。
         return this.http_request({
             method: "GET",
             url: "/robot/type",
