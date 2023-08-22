@@ -77,7 +77,7 @@ export class Robot extends EventEmitter {
             }
 
             // set robot
-            this.getType().then(res => {
+            this.get_type().then(res => {
                 this.type = res.data.data.type
                 console.log(`robot init success ! current robot type: ${this.type}`)
             }).catch(err => {
@@ -184,9 +184,7 @@ export class Robot extends EventEmitter {
      *
      * @return {Promise}  Returns a specific robot type such as dog human car
      */
-    public async getType(): Promise<any> {
-        // todo ：关于命名规则的问题。我们自己的项目，无论语言，需要统一规则，还是不同语言使用不同的规则。
-        // 比如 ts 常用的大小驼峰式。python 常用的烤串式。
+    public async get_type(): Promise<any> {
         return this.http_request({
             method: "GET",
             url: "/robot/type",
@@ -201,7 +199,7 @@ export class Robot extends EventEmitter {
      * @param {Mod} mod robot motion mode
      * @return {Promise}  return
      */
-    public async setMode(mod: Mod): Promise<any> {
+    public async set_mode(mod: Mod): Promise<any> {
         if (this.type == RobotType.CAR.toString()) {
             this.mod = mod
             return this.http_request({
@@ -479,7 +477,7 @@ export class Robot extends EventEmitter {
     public action_init(p2_params: number[] = [-0.0001, -0.0001, -0.0001, -0.0001], p3_params: number[] = [], p4_params: number[] = []): void {
         // When the action mode is enabled! You need to send a non-zero command to activate the robot
         this.action_send(p2_params, p3_params, p4_params)
-        this.setMode(Mod.MOD_ACTION).then(() => {
+        this.set_mode(Mod.MOD_ACTION).then(() => {
             console.log('robot action mod init success')
         })
     }
@@ -490,10 +488,10 @@ export class Robot extends EventEmitter {
      * `` applicable to the car ``
      */
     public action_destroy() {
-        this.setMode(Mod.MOD_HOME).then(() => {
+        this.set_mode(Mod.MOD_HOME).then(() => {
             console.log('robot action exec end')
         })
-        this.setMode(Mod.MOD_FIX).then(() => {
+        this.set_mode(Mod.MOD_FIX).then(() => {
             console.log('robot auto fix success')
         })
     }
