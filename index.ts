@@ -192,6 +192,27 @@ export class Robot extends EventEmitter {
     }
 
     /**
+     * get camera video status
+     *
+     * @return {Promise}  return
+     */
+    public get_video_status(): Promise<any> {
+        return this.http_request({
+            method: "GET",
+            url: "/control/camera",
+        })
+    }
+
+    /**
+     * get camera video stream url
+     *
+     * @return {string}  stream url
+     */
+    public get_video_stream_url(): string {
+        return `${this.baseUrl}/control/camera`
+    }
+
+    /**
      * set robot mode
      *
      * `` applicable to the car ``
