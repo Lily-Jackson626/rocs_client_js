@@ -243,7 +243,7 @@ export class Robot extends EventEmitter {
         if (this.type == RobotType.HUMAN.toString()) {
             return this.http_request({
                 method: "GET",
-                url: "/robot/jointLimit",
+                url: "/robot/join_limit",
             })
         }
         console.warn('robot type not allow this command! The current function is only applicable to humans');
@@ -258,7 +258,7 @@ export class Robot extends EventEmitter {
         if (this.type == RobotType.HUMAN.toString()) {
             return this.http_request({
                 method: "GET",
-                url: "/robot/jointStates",
+                url: "/robot/joint_states",
             })
         }
         console.warn('robot type not allow this command! The current function is only applicable to humans');
@@ -274,6 +274,16 @@ export class Robot extends EventEmitter {
     public enable_debug_state(frequence: number = 1): void {
         if (this.type == RobotType.HUMAN.toString()) {
             this.websocket_send({"command": "states", "data": {"frequence": frequence}})
+            console.log('The debug state is enabled successfully! ' +
+                'please listen to the data with the on_message function processing function as "SonnieGetStates"')
+            return
+        }
+        console.warn(`robot type not allow this command! The current function is only applicable to humans`);
+    }
+
+    public disable_debug_state(): void {
+        if (this.type == RobotType.HUMAN.toString()) {
+            this.websocket_send({"command": "states", "data": {"switch": false}})
             console.log('The debug state is enabled successfully! ' +
                 'please listen to the data with the on_message function processing function as "SonnieGetStates"')
             return
