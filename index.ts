@@ -192,6 +192,42 @@ export class Robot extends EventEmitter {
     }
 
     /**
+     * start robot
+     */
+    public async start(): Promise<any> {
+        return this.http_request({
+            method: "POST",
+            url: "/robot/start",
+        });
+    }
+
+    /**
+     * stop
+     */
+    public async stop(): Promise<any> {
+        return this.http_request({
+            method: "POST",
+            url: "/robot/stop",
+        });
+    }
+
+    /**
+     * Stand in place
+     *
+     *  ``applicable to the human``
+     */
+    public async stand(): Promise<any> {
+        if (this.type == RobotType.HUMAN.toString()) {
+            return this.http_request({
+                method: "POST",
+                url: "/robot/stand"
+            })
+        }  else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
+        }
+    }
+
+    /**
      * get camera video status
      *
      * @return {Promise}  return
@@ -230,8 +266,9 @@ export class Robot extends EventEmitter {
                     "mod_val": mod.toString()
                 }
             });
+        }else {
+            console.warn(`robot type not allow this command! The current function is only applicable to car`);
         }
-        console.warn('robot type not allow this command! The current function is only applicable to car');
     }
 
     /**
@@ -245,8 +282,9 @@ export class Robot extends EventEmitter {
                 method: "GET",
                 url: "/robot/join_limit",
             })
+        }else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
-        console.warn('robot type not allow this command! The current function is only applicable to humans');
     }
 
     /**
@@ -260,9 +298,11 @@ export class Robot extends EventEmitter {
                 method: "GET",
                 url: "/robot/joint_states",
             })
+        }else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
-        console.warn('robot type not allow this command! The current function is only applicable to humans');
     }
+
 
     /**
      * enable detail status of human
@@ -273,71 +313,29 @@ export class Robot extends EventEmitter {
      */
     public enable_debug_state(frequence: number = 1): void {
         if (this.type == RobotType.HUMAN.toString()) {
-            this.websocket_send({"command": "states", "data": {"frequence": frequence}})
-            console.log('The debug state is enabled successfully! ' +
-                'please listen to the data with the on_message function processing function as "SonnieGetStates"')
-            return
+            // this.websocket_send({"command": "states", "data": {"switch": false}})
+            this.http_request({
+                method: "GET",
+                url: "/robot/enable_states_listen",
+                params: {
+                    frequence: frequence
+                }
+            })
+        } else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
-        console.warn(`robot type not allow this command! The current function is only applicable to humans`);
     }
 
     public disable_debug_state(): void {
         if (this.type == RobotType.HUMAN.toString()) {
-            this.websocket_send({"command": "states", "data": {"switch": false}})
-            console.log('The debug state is enabled successfully! ' +
-                'please listen to the data with the on_message function processing function as "SonnieGetStates"')
-            return
-        }
-        console.warn(`robot type not allow this command! The current function is only applicable to humans`);
-    }
-
-    /**
-     * start robot
-     */
-    public async start(): Promise<any> {
-        return this.http_request({
-            method: "POST",
-            url: "/robot/start",
-        });
-    }
-
-    /**
-     * stop
-     */
-    public async stop(): Promise<any> {
-        return this.http_request({
-            method: "POST",
-            url: "/robot/stop",
-        });
-    }
-
-    /**
-     * reset
-     *
-     * The device is reset to zero or reset to the initial state.
-     *
-     * ``applicable to the human``
-     */
-    public async reset(): Promise<any> {
-        return this.http_request({
-            method: "POST",
-            url: "/robot/reset",
-        });
-    }
-
-    /**
-     * Stand in place
-     *
-     *  ``applicable to the human``
-     */
-    public async stand(): Promise<any> {
-        if (this.type == RobotType.HUMAN.toString()) {
-            return this.http_request({
-                method: "POST",
-                url: "/robot/stand"
+            // this.websocket_send({"command": "states", "data": {"switch": false}})
+            this.http_request({
+                method: "GET",
+                url: "/robot/disable_states_listen",
             })
-        }   
-        console.warn('robot type not allow this command! The current function is only applicable to human');
+        } else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
+        }
     }
 
     /**
@@ -372,8 +370,9 @@ export class Robot extends EventEmitter {
     public head(roll: number, pitch: number, yaw: number): void {
         if (this.type == RobotType.HUMAN.toString()) {
             this.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
+        }else {
+            console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
-        console.warn('robot type not allow this command! The current function is only applicable to human');
     }
 
     /**
