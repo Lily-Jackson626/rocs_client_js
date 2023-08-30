@@ -66,6 +66,14 @@ export class Robot extends EventEmitter {
             this.baseUrl = `http://${host}:${port}`
         }
 
+        // set robot
+        this.get_type().then(res => {
+            this.type = res.data.data
+            console.log(`robot init success ! current robot type: ${this.type}`)
+        }).catch(err => {
+            console.error(`robot type obtain fail: ${err}`)
+        })
+
         try {
             if (typeof window !== 'undefined') {
                 // applicable to the brower 
@@ -75,14 +83,6 @@ export class Robot extends EventEmitter {
                 const WebSocket = require('ws');
                 this.ws = new WebSocket(ws_url);
             }
-
-            // set robot
-            this.get_type().then(res => {
-                this.type = res.data.data.type
-                console.log(`robot init success ! current robot type: ${this.type}`)
-            }).catch(err => {
-                console.error(`robot type obtain fail: ${err}`)
-            })
 
             this.ws.onopen = () => {
                 this.emit('open')
@@ -222,7 +222,7 @@ export class Robot extends EventEmitter {
                 method: "POST",
                 url: "/robot/stand"
             })
-        }  else {
+        } else {
             console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
     }
@@ -266,7 +266,7 @@ export class Robot extends EventEmitter {
                     "mod_val": mod.toString()
                 }
             });
-        }else {
+        } else {
             console.warn(`robot type not allow this command! The current function is only applicable to car`);
         }
     }
@@ -282,7 +282,7 @@ export class Robot extends EventEmitter {
                 method: "GET",
                 url: "/robot/join_limit",
             })
-        }else {
+        } else {
             console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
     }
@@ -298,7 +298,7 @@ export class Robot extends EventEmitter {
                 method: "GET",
                 url: "/robot/joint_states",
             })
-        }else {
+        } else {
             console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
     }
@@ -311,10 +311,9 @@ export class Robot extends EventEmitter {
      *
      * @param {number} frequence frequence unit: s
      */
-    public enable_debug_state(frequence: number = 1): void {
+    public async enable_debug_state(frequence: number = 1): Promise<any> {
         if (this.type == RobotType.HUMAN.toString()) {
-            // this.websocket_send({"command": "states", "data": {"switch": false}})
-            this.http_request({
+            return this.http_request({
                 method: "GET",
                 url: "/robot/enable_states_listen",
                 params: {
@@ -326,10 +325,9 @@ export class Robot extends EventEmitter {
         }
     }
 
-    public disable_debug_state(): void {
+    public async disable_debug_state(): Promise<any> {
         if (this.type == RobotType.HUMAN.toString()) {
-            // this.websocket_send({"command": "states", "data": {"switch": false}})
-            this.http_request({
+            return this.http_request({
                 method: "GET",
                 url: "/robot/disable_states_listen",
             })
@@ -370,7 +368,7 @@ export class Robot extends EventEmitter {
     public head(roll: number, pitch: number, yaw: number): void {
         if (this.type == RobotType.HUMAN.toString()) {
             this.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
-        }else {
+        } else {
             console.warn(`robot type not allow this command! The current function is only applicable to humans`);
         }
     }
