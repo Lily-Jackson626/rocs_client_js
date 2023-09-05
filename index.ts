@@ -2,6 +2,8 @@ import {Human} from "./lib/robot/human"
 import {Car, CarMod} from "./lib/robot/car"
 import axios from "axios";
 import {ConnectOption} from "./lib/robot/robot_base";
+import {Camera} from "./lib/common/camera";
+import {System} from "./lib/common/system";
 
 
 /**
@@ -21,4 +23,4 @@ const get_robot_type = async (option?: ConnectOption) => {
 }
 
 module.exports = {Human, Car, CarMod, get_robot_type}
-export {Human, Car, CarMod, get_robot_type}
+export {Human, Car, CarMod, Camera, System, get_robot_type}

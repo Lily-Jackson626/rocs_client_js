@@ -28,7 +28,13 @@ export interface ConnectOption {
  */
 export class RobotBase extends EventEmitter {
 
+    /**
+     *  相机
+     */
     public readonly camera: Camera | undefined;
+    /**
+     * 系统控制
+     */
     public readonly system: System = new System()
     private readonly baseUrl: string = '';
     private readonly wsUrl: string = '';
