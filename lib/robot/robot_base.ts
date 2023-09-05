@@ -1,5 +1,4 @@
 ﻿import EventEmitter from "events";
-import WebSocket from "ws";
 import axios, {AxiosRequestConfig} from "axios";
 import {Camera} from "../common/camera";
 import {System} from "../common/system";
@@ -61,6 +60,7 @@ export class RobotBase extends EventEmitter {
             this.ws = new WebSocket(this.wsUrl);
         } else {
             // applicable to the nodejs
+            const WebSocket = require('ws')
             this.ws = new WebSocket(this.wsUrl);
         }
         if (this.ws) {
@@ -76,7 +76,7 @@ export class RobotBase extends EventEmitter {
                 this.emit('close');
             }
 
-            this.ws.onerror = (event: WebSocket.ErrorEvent) => {
+            this.ws.onerror = (event: Event) => {
                 this.emit('error', event);
             }
         }
@@ -156,7 +156,7 @@ export class RobotBase extends EventEmitter {
      * @protected
      */
     protected websocket_send(message: any) {
-        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+        if (this.ws && this.ws.readyState === 1) {
             this.ws.send(JSON.stringify(message))
             this.retry_count = 0
             return

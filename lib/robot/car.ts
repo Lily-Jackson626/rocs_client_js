@@ -59,7 +59,7 @@ export class Car extends RobotBase {
     public move(angle: number, speed: number): void {
         angle = super.cover_param(angle, 'angle', -45, 45)
         speed = super.cover_param(speed, 'speed', -500, 500)
-        this.websocket_send({
+        super.websocket_send({
             "command": "move",
             "data": {"angle": angle, "speed": speed}
         })

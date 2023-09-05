@@ -87,7 +87,7 @@ export class Human extends RobotBase {
     public walk(angle: number, speed: number): void {
         angle = super.cover_param(angle, 'angle', -45, 45)
         speed = super.cover_param(speed, 'speed', -0.8, 0.8)
-        this.websocket_send({
+        super.websocket_send({
             "command": "move",
             "data": {"angle": angle, "speed": speed}
         })
