@@ -48,7 +48,7 @@ export class RobotBase extends EventEmitter {
      */
     constructor(option?: ConnectOption) {
         super()
-        console.log('正在连接Robot 请等待...')
+        console.log('Robot 初始化...')
         const {ssl = false, host = '127.0.0.1', port = '8001'} = option ?? {};
 
         if (ssl) {
@@ -61,30 +61,34 @@ export class RobotBase extends EventEmitter {
 
         this.camera = new Camera(this.baseUrl)
 
-        if (typeof window !== 'undefined') {
-            // applicable to the browser
-            this.ws = new WebSocket(this.wsUrl);
-        } else {
-            // applicable to the nodejs
-            const WebSocket = require('ws')
-            this.ws = new WebSocket(this.wsUrl);
-        }
+        try {
+            if (typeof window !== 'undefined') {
+                // applicable to the browser
+                this.ws = new WebSocket(this.wsUrl);
+            } else {
+                // applicable to the nodejs
+                const WebSocket = require('ws')
+                this.ws = new WebSocket(this.wsUrl);
+            }
 
-        this.ws.onopen = () => {
-            console.log('Robot 初始化成功！连接可用')
-            this.emit('open')
-        }
+            this.ws.onopen = () => {
+                console.log('Robot 初始化成功!')
+                this.emit('open')
+            }
 
-        this.ws.onmessage = (message: MessageEvent) => {
-            this.emit('message', message);
-        }
+            this.ws.onmessage = (message: MessageEvent) => {
+                this.emit('message', message);
+            }
 
-        this.ws.onclose = () => {
-            this.emit('close');
-        }
+            this.ws.onclose = () => {
+                this.emit('close');
+            }
 
-        this.ws.onerror = (event: Event) => {
-            this.emit('error', event);
+            this.ws.onerror = (event: Event) => {
+                this.emit('error', event);
+            }
+        } catch (e) {
+            console.log('Robot 初始化失败！', e)
         }
     }
 
