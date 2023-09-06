@@ -13,13 +13,13 @@
   "devDependencies": {
     "@microsoft/tsdoc": "^0.14.2",
     "@types/ws": "^8.5.5",
-    "chai": "^4.3.8",
     "standard-version": "^9.5.0",
     "typedoc": "^0.24.8"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "events": "^3.3.0",
+    "typedoc-plugin-markdown": "^3.16.0",
     "ws": "^8.13.0"
   }
 }

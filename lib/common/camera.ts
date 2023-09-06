@@ -22,11 +22,9 @@ export class Camera {
                 this.videoStreamStatus = response.data.data
                 if (this.videoStreamStatus) {
                     this.videoStreamUrl = `${baseurl}/control/camera`
+                    console.error('设备摄像头初始化成功，状态可用...')
                 }
             })
-            .catch(err => {
-                console.error(err)
-                return undefined
-            });
+            .catch(err => console.error('设备摄像头初始化失败，状态可用！ 请检查后重启设备...', err));
     }
 }

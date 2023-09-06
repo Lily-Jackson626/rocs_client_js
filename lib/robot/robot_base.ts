@@ -38,7 +38,7 @@ export class RobotBase extends EventEmitter {
     public readonly system: System = new System()
     private readonly baseUrl: string = '';
     private readonly wsUrl: string = '';
-    private readonly ws: WebSocket | undefined;
+    private readonly ws!: WebSocket;
     private retry_count: number = 0
 
     /**
@@ -48,7 +48,7 @@ export class RobotBase extends EventEmitter {
      */
     constructor(option?: ConnectOption) {
         super()
-        console.log('Robot is initializing, please wait...')
+        console.log('正在连接Robot 请等待...')
         const {ssl = false, host = '127.0.0.1', port = '8001'} = option ?? {};
 
         if (ssl) {
@@ -69,26 +69,23 @@ export class RobotBase extends EventEmitter {
             const WebSocket = require('ws')
             this.ws = new WebSocket(this.wsUrl);
         }
-        if (this.ws) {
-            this.ws.onopen = () => {
-                this.emit('open')
-            }
 
-            this.ws.onmessage = (message) => {
-                this.emit('message', message);
-            }
-
-            this.ws.onclose = () => {
-                this.emit('close');
-            }
-
-            this.ws.onerror = (event: Event) => {
-                this.emit('error', event);
-            }
+        this.ws.onopen = () => {
+            console.log('Robot 初始化成功！连接可用')
+            this.emit('open')
         }
-        setTimeout(() => {
-            console.log('Robot instantiation is successful. Congratulations')
-        }, 5000)
+
+        this.ws.onmessage = (message: MessageEvent) => {
+            this.emit('message', message);
+        }
+
+        this.ws.onclose = () => {
+            this.emit('close');
+        }
+
+        this.ws.onerror = (event: Event) => {
+            this.emit('error', event);
+        }
     }
 
     /**
@@ -194,16 +191,6 @@ export class RobotBase extends EventEmitter {
             ...config
         })
     }
-
-    /**
-     * cover param
-     *
-     * @param {number} param param_value
-     * @param {string} value param_name
-     * @param {number} minThreshold param min threshold
-     * @param {number} maxThreshold param max threshold
-     * @private
-     */
 
     /**
      * 参数转换，对参数做限定
