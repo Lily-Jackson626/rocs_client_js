@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.19](https://github.com/FFTAI/gros_client_js/compare/v0.2.18...v0.2.19) (2023-09-06)
+
+### [0.2.18](https://github.com/FFTAI/gros_client_js/compare/v0.2.17...v0.2.18) (2023-09-06)
+
+### [0.2.17](https://github.com/FFTAI/gros_client_js/compare/v0.2.16...v0.2.17) (2023-09-06)
+
+### [0.2.16](https://github.com/FFTAI/gros_client_js/compare/v0.2.15...v0.2.16) (2023-09-05)
+
+### [0.2.15](https://github.com/FFTAI/gros_client_js/compare/v0.2.14...v0.2.15) (2023-09-05)
+
+### [0.2.14](https://github.com/FFTAI/gros_client_js/compare/v0.2.13...v0.2.14) (2023-09-05)
+
+### [0.2.13](https://github.com/FFTAI/gros_client_js/compare/v0.2.7...v0.2.13) (2023-09-05)
+
 ### [0.2.12](https://github.com/FFTAI/gros_client_js/compare/v0.2.11...v0.2.12) (2023-08-30)
 
 ### [0.2.11](https://github.com/FFTAI/gros_client_js/compare/v0.2.10...v0.2.11) (2023-08-30)

@@ -4,6 +4,7 @@ node_modules/
 test/
 docs/
 build/
+doc/
 
 *.md
 *.log

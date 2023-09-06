@@ -1,6 +1,6 @@
 {
   "name": "gros-client",
-  "version": "0.2.12",
+  "version": "0.2.19",
   "description": "this client for npm",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "events": "^3.3.0",
+    "typedoc-plugin-markdown": "^3.16.0",
     "ws": "^8.13.0"
   }
 }
