@@ -41,4 +41,4 @@
 
 #### Defined in
 
-[index.ts:16](https://github.com/FFTAI/gros_client_js/blob/29e0334/index.ts#L16)
+[index.ts:16](https://github.com/FFTAI/gros_client_js/blob/559d588/index.ts#L16)
