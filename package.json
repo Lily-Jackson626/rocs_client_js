@@ -1,11 +1,11 @@
 {
   "name": "gros-client",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "this client for npm",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "doc": "typedoc index.ts ",
+    "doc": "typedoc index.ts",
     "deploy": "tsc && npx standard-version && npm publish"
   },
   "author": "fftai",
