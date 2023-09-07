@@ -86,7 +86,7 @@ RobotBase.constructor
 
 #### Defined in
 
-[lib/robot/human.ts:10](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L10)
+[lib/robot/human.ts:10](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L10)
 
 ## Properties
 
@@ -102,7 +102,7 @@ RobotBase.camera
 
 #### Defined in
 
-[lib/robot/robot_base.ts:34](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L34)
+[lib/robot/robot_base.ts:34](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L34)
 
 ___
 
@@ -118,7 +118,7 @@ RobotBase.system
 
 #### Defined in
 
-[lib/robot/robot_base.ts:38](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L38)
+[lib/robot/robot_base.ts:38](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L38)
 
 ___
 
@@ -299,7 +299,7 @@ RobotBase.cover\_param
 
 #### Defined in
 
-[lib/robot/robot_base.ts:210](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L210)
+[lib/robot/robot_base.ts:210](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L210)
 
 ___
 
@@ -317,7 +317,7 @@ return
 
 #### Defined in
 
-[lib/robot/human.ts:74](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L74)
+[lib/robot/human.ts:74](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L74)
 
 ___
 
@@ -409,7 +409,7 @@ return
 
 #### Defined in
 
-[lib/robot/human.ts:60](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L60)
+[lib/robot/human.ts:60](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L60)
 
 ___
 
@@ -491,7 +491,7 @@ return
 
 #### Defined in
 
-[lib/robot/human.ts:34](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L34)
+[lib/robot/human.ts:34](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L34)
 
 ___
 
@@ -509,7 +509,7 @@ return
 
 #### Defined in
 
-[lib/robot/human.ts:46](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L46)
+[lib/robot/human.ts:46](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L46)
 
 ___
 
@@ -533,7 +533,7 @@ ___
 
 #### Defined in
 
-[lib/robot/human.ts:104](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L104)
+[lib/robot/human.ts:104](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L104)
 
 ___
 
@@ -567,7 +567,7 @@ RobotBase.http\_request
 
 #### Defined in
 
-[lib/robot/robot_base.ts:191](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L191)
+[lib/robot/robot_base.ts:191](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L191)
 
 ___
 
@@ -751,7 +751,7 @@ RobotBase.on\_close
 
 #### Defined in
 
-[lib/robot/robot_base.ts:134](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L134)
+[lib/robot/robot_base.ts:134](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L134)
 
 ___
 
@@ -777,7 +777,7 @@ RobotBase.on\_connected
 
 #### Defined in
 
-[lib/robot/robot_base.ts:125](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L125)
+[lib/robot/robot_base.ts:125](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L125)
 
 ___
 
@@ -803,7 +803,7 @@ RobotBase.on\_error
 
 #### Defined in
 
-[lib/robot/robot_base.ts:143](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L143)
+[lib/robot/robot_base.ts:143](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L143)
 
 ___
 
@@ -829,7 +829,7 @@ RobotBase.on\_message
 
 #### Defined in
 
-[lib/robot/robot_base.ts:152](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L152)
+[lib/robot/robot_base.ts:152](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L152)
 
 ___
 
@@ -1222,7 +1222,7 @@ return
 
 #### Defined in
 
-[lib/robot/human.ts:22](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L22)
+[lib/robot/human.ts:22](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L22)
 
 ___
 
@@ -1244,7 +1244,7 @@ RobotBase.start
 
 #### Defined in
 
-[lib/robot/robot_base.ts:100](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L100)
+[lib/robot/robot_base.ts:100](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L100)
 
 ___
 
@@ -1266,7 +1266,7 @@ RobotBase.stop
 
 #### Defined in
 
-[lib/robot/robot_base.ts:112](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L112)
+[lib/robot/robot_base.ts:112](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L112)
 
 ___
 
@@ -1289,7 +1289,7 @@ ___
 
 #### Defined in
 
-[lib/robot/human.ts:87](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/human.ts#L87)
+[lib/robot/human.ts:87](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/human.ts#L87)
 
 ___
 
@@ -1318,7 +1318,7 @@ RobotBase.websocket\_send
 
 #### Defined in
 
-[lib/robot/robot_base.ts:165](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/robot/robot_base.ts#L165)
+[lib/robot/robot_base.ts:165](https://github.com/FFTAI/gros_client_js/blob/6341ea8/lib/robot/robot_base.ts#L165)
 
 ___
 
