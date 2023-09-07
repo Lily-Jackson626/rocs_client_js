@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[lib/common/system.ts:11](https://github.com/FFTAI/gros_client_js/blob/559d588/lib/common/system.ts#L11)
+[lib/common/system.ts:11](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/common/system.ts#L11)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[lib/common/system.ts:15](https://github.com/FFTAI/gros_client_js/blob/559d588/lib/common/system.ts#L15)
+[lib/common/system.ts:15](https://github.com/FFTAI/gros_client_js/blob/b59e88e/lib/common/system.ts#L15)
