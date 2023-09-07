@@ -102,6 +102,9 @@ export class Human extends RobotBase {
      * @param {number} yaw   （偏航角）：描述围绕z轴旋转的角度。左扭头为负，右扭头为正，范围（-17.1887-17.1887）
      */
     public head(roll: number, pitch: number, yaw: number): void {
+        roll = super.cover_param(roll, 'roll', -17.1887, 17.1887)
+        pitch = super.cover_param(pitch, 'pitch', -17.1887, 17.1887)
+        yaw = super.cover_param(yaw, 'yaw', -17.1887, 17.1887)
         super.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
     }
 
