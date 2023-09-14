@@ -1,7 +1,7 @@
 {
   "name": "gros-client",
-  "version": "0.2.22",
-  "description": "this client for npm",
+  "version": "0.2.23",
+  "description": "General Robotics OS - Client Library (Javascript)",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
