@@ -13,4 +13,7 @@ doc/
 
 /package-lock.json
 tsconfig.json
+typedoc.json
 .versionrc.json
+
+
