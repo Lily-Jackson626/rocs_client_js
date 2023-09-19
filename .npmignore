@@ -2,9 +2,8 @@
 .idea/
 node_modules/
 test/
-docs/
 build/
-doc/
+doc*
 
 *.md
 *.log
