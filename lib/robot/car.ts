@@ -54,11 +54,11 @@ export class Car extends RobotBase {
      * 控制Car移动 (该请求维持了长链接的方式进行发送)
      *
      * @param {number} angle 角度 控制方向，取值范围为正负45度。向左为正，向右为负！(浮点数8位)
-     * @param {number} speed 速度 控制前后，取值范围为正负500。向前为正，向后为负！(浮点数8位)
+     * @param {number} speed 速度 控制前后，取值范围为正负0.8。向前为正，向后为负！(浮点数8位)
      */
     public move(angle: number, speed: number): void {
         angle = super.cover_param(angle, 'angle', -45, 45)
-        speed = super.cover_param(speed, 'speed', -500, 500)
+        speed = super.cover_param(speed, 'speed', -0.8, 0.8)
         super.websocket_send({
             "command": "move",
             "data": {"angle": angle, "speed": speed}
