@@ -108,5 +108,21 @@ export class Human extends RobotBase {
         super.websocket_send({"command": "head", "data": {"roll": roll, "pitch": pitch, "yaw": yaw}})
     }
 
+    /**
+     * 控制GR-01人形设备上肢
+     * 
+     * @param {number} arm_action 胳膊  归零:RESET 左挥手:LEFT_ARM_WAVE 双臂挥手:TWO_ARMS_WAVE 甩胳膊:ARMS_SWING 打招呼:HELLO
+     * @param {number} hand_action 手  半握手:HALF_HANDSHAKE 竖大拇指:THUMBS_UP 手张开:OPEN 手微屈:SLIGHTLY_BENT 抓握:GRASP 抖动手:TREMBLE 握手:HANDSHAKE
+     */
+    public async upper_body(arm_action: string,hand_action: string): Promise<any> {
+        return super.http_request({
+            method: "POST",
+            url: "/robot/upper_body",
+            data: {
+                arm_action: arm_action,
+                hand_action: hand_action
+            }
+        })
+    }
 
 }
