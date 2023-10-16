@@ -1,5 +1,39 @@
 import {ConnectOption, RobotBase} from "./robot_base";
 
+export class Motor {
+    constructor(public no: string, public orientation: string, public angle: number) {}
+}
+
+export enum ArmAction {
+    // 归零
+    RESET = "RESET",
+    // 左挥手
+    LEFT_ARM_WAVE = "LEFT_ARM_WAVE",
+    // 双臂挥手
+    TWO_ARMS_WAVE = "TWO_ARMS_WAVE",
+    // 甩胳膊
+    ARMS_SWING = "ARMS_SWING",
+    // 打招呼
+    HELLO = "HELLO"
+}
+
+export enum HandAction {
+    // 半握手
+    HALF_HANDSHAKE = "HALF_HANDSHAKE",
+    // 竖大拇指
+    THUMB_UP = "THUMB_UP",
+    // 手张开
+    OPEN = "OPEN",
+    // 手微屈
+    SLIGHTLY_BENT = "SLIGHTLY_BENT",
+    // 抓握
+    GRASP = "GRASP",
+    // 抖动手
+    TREMBLE = "TREMBLE",
+    // 握手
+    HANDSHAKE = "HANDSHAKE"
+}
+
 /**
  * GR-1人形机器人对象
  *
@@ -114,7 +148,9 @@ export class Human extends RobotBase {
      * @param {number} arm_action 胳膊  归零:RESET 左挥手:LEFT_ARM_WAVE 双臂挥手:TWO_ARMS_WAVE 甩胳膊:ARMS_SWING 打招呼:HELLO
      * @param {number} hand_action 手  半握手:HALF_HANDSHAKE 竖大拇指:THUMBS_UP 手张开:OPEN 手微屈:SLIGHTLY_BENT 抓握:GRASP 抖动手:TREMBLE 握手:HANDSHAKE
      */
-    public async upper_body(arm_action: string,hand_action: string): Promise<any> {
+    public async upper_body(arm_action?: ArmAction,hand_action?: HandAction): Promise<any> {
+        console.log('111',arm_action)
+        console.log('222',hand_action)
         return super.http_request({
             method: "POST",
             url: "/robot/upper_body",
@@ -125,4 +161,24 @@ export class Human extends RobotBase {
         })
     }
 
+    /**
+     * 获取电机限位
+     * 
+     * @return {Promise}  return
+     */
+    public async _get_motor_limit_list() {
+        return super.http_request({
+            method: "GET",
+            url: "/robot/motor/limit/list"
+        })
+    }
+
+    /**
+     * 移动关节
+     * 
+     * @return {Promise}  return
+     */
+    public async move_joint() {
+
+    }
 }

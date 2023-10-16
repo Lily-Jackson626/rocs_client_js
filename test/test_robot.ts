@@ -1,4 +1,5 @@
 import {Car, get_robot_type, Human, CarMod} from '../index'
+import { ArmAction } from '../lib/robot/human';
 
 const sleep = (second: number) => new Promise((resolve) => setTimeout(resolve, second * 1000));
 
@@ -20,12 +21,13 @@ get_robot_type({host: '192.168.9.17'}).then((res: any) => {
 
 
 const test_robot = async (human: Human) => {
-    await human.start();
-    await sleep(10)
-    await human.stand()
-    await sleep(5)
-    await human.enable_debug_state(1)
-    human.walk(0.1, 0.1)
+    // await human.start();
+    // await sleep(10)
+    // await human.stand()
+    // await sleep(5)
+    // await human.enable_debug_state(1)
+    // human.walk(0.1, 0.1)
+    await human.upper_body(ArmAction.ARMS_SWING)
 }
 
 const test_car = async (car: Car) => {
