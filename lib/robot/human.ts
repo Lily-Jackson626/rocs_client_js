@@ -41,8 +41,12 @@ export enum HandAction {
  */
 export class Human extends RobotBase {
 
+    private motor_limits: Array<any> = []
     constructor(option?: ConnectOption) {
         super(option);
+        this.get_motor_limit_list().then(res=>{
+            this.motor_limits = res.data.data
+        }).catch(error=>{console.log(error)})
     }
 
     /**
@@ -149,8 +153,6 @@ export class Human extends RobotBase {
      * @param {number} hand_action 手  半握手:HALF_HANDSHAKE 竖大拇指:THUMBS_UP 手张开:OPEN 手微屈:SLIGHTLY_BENT 抓握:GRASP 抖动手:TREMBLE 握手:HANDSHAKE
      */
     public async upper_body(arm_action?: ArmAction,hand_action?: HandAction): Promise<any> {
-        console.log('111',arm_action)
-        console.log('222',hand_action)
         return super.http_request({
             method: "POST",
             url: "/robot/upper_body",
@@ -166,7 +168,7 @@ export class Human extends RobotBase {
      * 
      * @return {Promise}  return
      */
-    public async _get_motor_limit_list() {
+    public async get_motor_limit_list(): Promise<any> {
         return super.http_request({
             method: "GET",
             url: "/robot/motor/limit/list"
@@ -178,7 +180,34 @@ export class Human extends RobotBase {
      * 
      * @return {Promise}  return
      */
-    public async move_joint() {
-
+    public async move_joint(args: Array<Motor>): Promise<void> {
+        var motors: any = []
+        var target_list: any = []
+        args.forEach(motor => {
+            motors.push({no: motor.no, orientation: motor.orientation, angle: motor.angle})
+        });
+        console.log('motor_limits',this.motor_limits)
+        if(this.motor_limits.length == 0) {
+            setTimeout(() => {
+                this.move_joint(args)
+            }, 500);
+            return
+        }
+        motors.forEach((item1: { no: any; orientation: any; }) => {
+            this.motor_limits.forEach((item2: { no: any; orientation: any; }) => {
+                if (item1.no == item2.no && item1.orientation == item2.orientation)
+                    target_list.push({...item1,...item2})
+            });
+        });
+        if (target_list.length > 0) {
+            target_list.forEach((motor: { [x: string]: any; }) => {
+                motor['angle'] = super.cover_param(motor['angle'], 'angle', motor['min_angle'], motor['max_angle']);
+                delete motor['min_angle'];
+                delete motor['max_angle'];
+                delete motor['ip'];
+            });
+            console.log('target_list',target_list)
+            super.websocket_send({'command': 'move_joint', 'data': {"command": target_list}})
+        } 
     }
 }
