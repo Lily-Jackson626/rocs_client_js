@@ -1,5 +1,39 @@
 import {ConnectOption, RobotBase} from "./robot_base";
 
+export class Motor {
+    constructor(public no: string, public orientation: string, public angle: number) {}
+}
+
+export enum ArmAction {
+    // 归零
+    RESET = "RESET",
+    // 左挥手
+    LEFT_ARM_WAVE = "LEFT_ARM_WAVE",
+    // 双臂挥手
+    TWO_ARMS_WAVE = "TWO_ARMS_WAVE",
+    // 甩胳膊
+    ARMS_SWING = "ARMS_SWING",
+    // 打招呼
+    HELLO = "HELLO"
+}
+
+export enum HandAction {
+    // 半握手
+    HALF_HANDSHAKE = "HALF_HANDSHAKE",
+    // 竖大拇指
+    THUMB_UP = "THUMB_UP",
+    // 手张开
+    OPEN = "OPEN",
+    // 手微屈
+    SLIGHTLY_BENT = "SLIGHTLY_BENT",
+    // 抓握
+    GRASP = "GRASP",
+    // 抖动手
+    TREMBLE = "TREMBLE",
+    // 握手
+    HANDSHAKE = "HANDSHAKE"
+}
+
 /**
  * GR-1人形机器人对象
  *
@@ -7,8 +41,12 @@ import {ConnectOption, RobotBase} from "./robot_base";
  */
 export class Human extends RobotBase {
 
+    private motor_limits: Array<any> = []
     constructor(option?: ConnectOption) {
         super(option);
+        this.get_motor_limit_list().then(res=>{
+            this.motor_limits = res.data.data
+        }).catch(error=>{console.log(error)})
     }
 
     /**
@@ -114,7 +152,7 @@ export class Human extends RobotBase {
      * @param {number} arm_action 胳膊  归零:RESET 左挥手:LEFT_ARM_WAVE 双臂挥手:TWO_ARMS_WAVE 甩胳膊:ARMS_SWING 打招呼:HELLO
      * @param {number} hand_action 手  半握手:HALF_HANDSHAKE 竖大拇指:THUMBS_UP 手张开:OPEN 手微屈:SLIGHTLY_BENT 抓握:GRASP 抖动手:TREMBLE 握手:HANDSHAKE
      */
-    public async upper_body(arm_action: string,hand_action: string): Promise<any> {
+    public async upper_body(arm_action?: ArmAction,hand_action?: HandAction): Promise<any> {
         return super.http_request({
             method: "POST",
             url: "/robot/upper_body",
@@ -125,4 +163,51 @@ export class Human extends RobotBase {
         })
     }
 
+    /**
+     * 获取电机限位
+     * 
+     * @return {Promise}  return
+     */
+    public async get_motor_limit_list(): Promise<any> {
+        return super.http_request({
+            method: "GET",
+            url: "/robot/motor/limit/list"
+        })
+    }
+
+    /**
+     * 移动关节
+     * 
+     * @return {Promise}  return
+     */
+    public async move_joint(args: Array<Motor>): Promise<void> {
+        var motors: any = []
+        var target_list: any = []
+        args.forEach(motor => {
+            motors.push({no: motor.no, orientation: motor.orientation, angle: motor.angle})
+        });
+        console.log('motor_limits',this.motor_limits)
+        if(this.motor_limits.length == 0) {
+            setTimeout(() => {
+                this.move_joint(args)
+            }, 500);
+            return
+        }
+        motors.forEach((item1: { no: any; orientation: any; }) => {
+            this.motor_limits.forEach((item2: { no: any; orientation: any; }) => {
+                if (item1.no == item2.no && item1.orientation == item2.orientation)
+                    target_list.push({...item1,...item2})
+            });
+        });
+        if (target_list.length > 0) {
+            target_list.forEach((motor: { [x: string]: any; }) => {
+                motor['angle'] = super.cover_param(motor['angle'], 'angle', motor['min_angle'], motor['max_angle']);
+                delete motor['min_angle'];
+                delete motor['max_angle'];
+                delete motor['ip'];
+            });
+            console.log('target_list',target_list)
+            super.websocket_send({'command': 'move_joint', 'data': {"command": target_list}})
+        } 
+    }
 }
