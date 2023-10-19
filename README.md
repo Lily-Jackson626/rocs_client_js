@@ -13,9 +13,9 @@
 | 0.2 | 傅利叶软件部 | 2023.9 | 1. 控制模块、系统模块<br/>2. 具体coding | [0.2说明](https://fftai.github.io/v0.2.html) |
 | 1.* | 傅利叶软件部 | 2023.10 | 1. 手部、头部预设动作<br/>2. 上肢单关节控制  |  |
 
-## 快速上手
+## QuickStart
 
-### 安装
+### Install
 
 ```shell
 npm install gros-client
@@ -32,12 +32,12 @@ import {Human} from 'gros-client';
 然后，你需要创建一个机器人对象，以便使用这个SDK
 
 ```javascript
-import {Human} from 'gros-client';  // 按需导入Human、同理还有Car、Dog等
+import {Human} from 'gros-client';  // import Human, Car and Dog
 
 let human = new Human({host: '192.168.9.17'});
 ```
 
-### 控制机器人
+### control robot
 你可以使用以下方法来控制机器人：
 
 - start(): 回零/开启控制
